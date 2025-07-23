@@ -1,9 +1,7 @@
 package com.spring.boot.springbootarticlesystem.Model;
 
-import jakarta.validation.constraints.AssertFalse;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -39,7 +37,9 @@ public class NewsArticle {
     @AssertFalse(message = "isPublished must initially be false")
     private boolean isPublished;
 
-    @Pattern(regexp = "^\\d\\d\\d\\d/\\d\\d/\\d\\d$", message = "the publishDate must be in the format of YYYY/MM/DD")
+    // since isPublished must be false at first, it makes no sense to set the publishDate when creating the article
+    // hence it does not need validation except when updating the article
+    @PastOrPresent(message = "the publishDate must be in the past or the present")
     private LocalDate publishDate;
 
 }

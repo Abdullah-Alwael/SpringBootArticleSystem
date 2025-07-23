@@ -3,6 +3,7 @@ package com.spring.boot.springbootarticlesystem.Service;
 import com.spring.boot.springbootarticlesystem.Model.NewsArticle;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Service
@@ -44,6 +45,7 @@ public class NewsArticleService {
         for (NewsArticle a : articles) {
             if (a.getID().equals(iD)) {
                 a.setPublished(true);
+                a.setPublishDate(LocalDate.now()); // sets the publishDate to the current date automatically
                 return true;
             }
         }
